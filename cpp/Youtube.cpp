@@ -94,6 +94,7 @@ Playlist::Playlist(const std::string& id, const std::string& apiKey)
 	{
 		auto json = nlohmann::json::parse(response.contents.c_str());
 		int numVideos = json["pageInfo"]["totalResults"];
+		videos.reserve(numVideos);
 		int cnt = 0;
 		while (true)
 		{

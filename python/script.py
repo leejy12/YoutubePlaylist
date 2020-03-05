@@ -10,25 +10,24 @@ def column(matrix, i):
 	return [row[i] for row in matrix]
 
 class Video(object):
-    def __init__(self, id, api):
-        url = GOOGLE_API_YOUTUBE + "videos?id=%s&part=snippet,statistics&key=%s" % (id, api)
+    def __init__(self, videoID, api):
+        url = GOOGLE_API_YOUTUBE + "videos?id=%s&part=snippet,statistics&key=%s" % (videoID, api)
         result = requests.get(url)
 
         if result.status_code != 200:
-            print("Failed initializing video with id: %s\n" % id)
+            print("Failed initializing video with id: %s\n" % videoID)
             print("Request returned %d\n" % result.status_code)
         else:
             jsonDict = result.json()
-            # self.title = jsonDict["items"][0]["snippet"]["title"]
             self.views = int(jsonDict["items"][0]["statistics"]["viewCount"])
             ymd: list = jsonDict["items"][0]["snippet"]["publishedAt"][:10].split("-")
             self.uploadDate = datetime.date(int(ymd[0]), int(ymd[1]), int(ymd[2]))
 
 class Playlist(object):
-    def __init__(self, id, api):
-        result = requests.get(GOOGLE_API_YOUTUBE + "playlists?id=%s&part=snippet&key=%s" % (id, api))
+    def __init__(self, listID, api):
+        result = requests.get(GOOGLE_API_YOUTUBE + "playlists?id=%s&part=snippet&key=%s" % (listID, api))
         if result.status_code != 200:
-            print("Failed initializing playlist with id: %s\n" % id)
+            print("Failed initializing playlist with id: %s\n" % listID)
             print("Request returned %d\n" % result.status_code)
             return
         else:
@@ -36,7 +35,7 @@ class Playlist(object):
             self.title = jsonDict["items"][0]["snippet"]["title"]
             self.channel = jsonDict["items"][0]["snippet"]["channelTitle"]
         
-        url = GOOGLE_API_YOUTUBE + "playlistItems?playlistId=%s&part=contentDetails&key=%s&maxResult=50" % (id, api)
+        url = GOOGLE_API_YOUTUBE + "playlistItems?playlistId=%s&part=contentDetails&key=%s&maxResult=50" % (listID, api)
         result = requests.get(url)
         if result.status_code == 200:
             jsonDict = result.json()
