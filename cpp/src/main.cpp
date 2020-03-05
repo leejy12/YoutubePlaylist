@@ -45,7 +45,7 @@ int main(int argc, const char* argv[])
 		<< "] by [" << playlist.GetChannel()
 		<< "] on " << std::put_time(tm, "%Y-%m-%d");
 	std::cout << "\n\n";
-	std::cout << "index\tviews\tviews per week\n";
+	std::cout << "index\tviews\tviews/wk\n";
 	std::cout << "_______________________________________\n";
 	for (const Data& d : datas)
 	{
