@@ -4,8 +4,6 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-# AIzaSyDgl4MNkB81UpR4MBS3SzHg2JvD2tp4H3k
-
 GOOGLE_API_YOUTUBE = "https://www.googleapis.com/youtube/v3/"
 
 def column(matrix, i):
