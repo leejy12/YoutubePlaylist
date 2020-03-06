@@ -10,7 +10,7 @@ HttpClient YoutubeItem::http;
 
 time_t DateToTime_t(const std::string& date)
 {
-	// date is in YYYY-MM-DDThh:mm:ss format
+	// date is in YYYY-MM-DDThh:mm:ss.sZ format
 	std::tm tm = { 0 };
 	tm.tm_year = std::stoi(date.substr(0, 4)) - 1900;
 	tm.tm_mon  = std::stoi(date.substr(5, 2)) - 1;
@@ -53,8 +53,6 @@ Video::Video(const std::string& id, const std::string& apiKey)
 		auto json = nlohmann::json::parse(response.contents.c_str());
 		views = std::stoi(std::string(json["items"][0]["statistics"]["viewCount"]));
 		std::string publishDate = json["items"][0]["snippet"]["publishedAt"];
-		// change publishDate to YYYY-MM-DDThh:mm:ss format
-		publishDate = publishDate.substr(0, 19);
 		uploadTime_t = DateToTime_t(publishDate);
 	}
 }
