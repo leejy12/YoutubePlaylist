@@ -15,7 +15,7 @@ In progress... [||||||||||||||||||||||||||||||||||||||||||||||||||]  (100%)
 
 View analysis of [OpenGL] by [The Cherno] on 2020-03-06
 
-index   views   views per week
+index   views   views/wk
 _______________________________________
 1       298514  2318.61
 2       212831  1666.04
