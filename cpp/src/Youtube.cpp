@@ -98,7 +98,7 @@ Playlist::Playlist(const std::string& id, const std::string& apiKey)
 		int cnt = 0;
 		while (true)
 		{
-			for (const auto videoDesc : json["items"])
+			for (const auto& videoDesc : json["items"])
 			{
 				videos.push_back(Video(videoDesc["contentDetails"]["videoId"], apiKey));
 				ShowProgressBar(++cnt, numVideos);
