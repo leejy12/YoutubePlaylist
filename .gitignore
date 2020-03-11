@@ -1,0 +1,8 @@
+# User-specific files
+*.user
+
+# Build results
+Release/
+
+# Visual Studio 2019 cache/options directory
+.vs/

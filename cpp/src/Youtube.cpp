@@ -51,7 +51,8 @@ Video::Video(const std::string& id, const std::string& apiKey)
 	else
 	{
 		auto json = nlohmann::json::parse(response.contents.c_str());
-		views = std::stoi(std::string(json["items"][0]["statistics"]["viewCount"]));
+		// views = std::stoi(std::string(json["items"][0]["statistics"]["viewCount"]));
+		views = std::stoi(json["items"][0]["statistics"]["viewCount"].get<std::string>());
 		std::string publishDate = json["items"][0]["snippet"]["publishedAt"];
 		uploadTime_t = DateToTime_t(publishDate);
 	}
@@ -103,7 +104,7 @@ Playlist::Playlist(const std::string& id, const std::string& apiKey)
 			}
 			if (json.contains("nextPageToken"))
 			{
-				nextUrl = url.str() + "&pageToken=" + std::string(json["nextPageToken"]);
+				nextUrl = url.str() + "&pageToken=" + json["nextPageToken"].get<std::string>();
 				json = nlohmann::json::parse(http.Get(nextUrl).contents.c_str());
 			}
 			else
